@@ -26,6 +26,8 @@ function loadmappacksettings(suspended)
 			continuesublevelmusic = true
 		elseif s2[1] == "nolowtime" then
 			nolowtime = true
+		elseif s2[1] == "usesuspends" then
+			alwaysdeletesuspend = true
 		elseif s2[1] == "character" then
 			for i = 1, players do
 				setcustomplayer(s2[2], i)
@@ -99,7 +101,7 @@ function loadcustomtext()
 				local s4 = s2[2]:split(",")
 				
 				for j = 1, 3 do
-					endingtextcolor[j] = tonumber(s4[j])/255
+					endingtextcolor[j] = tonumber(s4[j])
 				end
 			elseif s3[1] == "endingtext" then
 				local s4 = s2[2]:split(",")
@@ -117,7 +119,7 @@ function loadcustomtext()
 				local s4 = s2[2]:split(",")
 				
 				for j = 1, 3 do
-					hudtextcolor[j] = tonumber(s4[j])/255
+					hudtextcolor[j] = tonumber(s4[j])
 				end
 			elseif s3[1] == "hudcolorname" then
 				hudtextcolorname = s2[2]
@@ -166,7 +168,7 @@ function loadcustomtext()
 end
 
 function defaultcustomtext(initial)
-	endingtextcolor = {1, 1, 1}
+	endingtextcolor = {255, 255, 255}
 	endingtextcolorname = "white"
 	endingtext = {"congratulations!", "you have finished this mappack!"}
 	toadtext = {"thank you mario!", "but our princess is in", "another castle!"}
@@ -180,7 +182,7 @@ function defaultcustomtext(initial)
 			playername = "mario"
 		end
 	end
-	hudtextcolor = {1, 1, 1}
+	hudtextcolor = {255, 255, 255}
 	hudtextcolorname = "white"
 	hudvisible = true
 	hudworldletter = false
@@ -192,13 +194,13 @@ end
 function savecustomtext()
 	local s = ""
 	local color = textcolors[textcolorl]
-	s = s .. string.format("endingtextcolor=%s, %s, %s", round(color[1]*255), round(color[2]*255), round(color[3]*255))
+	s = s .. string.format("endingtextcolor=%s, %s, %s", unpack(color))
 	s = s .. "\r\nendingcolorname=" .. textcolorl
 	s = s .. "\r\nendingtext=" .. guielements["editendingtext1"].value .. "," .. guielements["editendingtext2"].value
 	if guielements["editplayername"].value ~= "" then s = s .. "\r\nplayername=" .. guielements["editplayername"].value end
 	s = s .. "\r\n"
 	color = textcolors[textcolorp]
-	s = s .. string.format("hudtextcolor=%s, %s, %s", round(color[1]*255), round(color[2]*255), round(color[3]*255))
+	s = s .. string.format("hudtextcolor=%s, %s, %s", unpack(color))
 	s = s .. "\r\nhudcolorname=" .. textcolorp
 	s = s .. "\r\nhudvisible=" .. tostring(hudvisible)
 	s = s .. "\r\nhudworldletter=" .. tostring(hudworldletter)

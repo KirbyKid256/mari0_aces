@@ -66,7 +66,7 @@ function menu_load()
 	end
 	
 	continueavailable = false
-	if love.filesystem.getInfo(savesfolder .. "/" .. mappack .. ".suspend") then
+	if love.filesystem.getInfo("mari0_aces/" .. mappack .. ".suspend") then
 		continueavailable = true
 	end
 	
@@ -2423,7 +2423,7 @@ function menu_keypressed(key, unicode)
 			saveconfig()
 
 			continueavailable = false
-			if love.filesystem.getInfo(savesfolder .. "/" .. mappack .. ".suspend") then
+			if love.filesystem.getInfo("mari0_aces/" .. mappack .. ".suspend") then
 				continueavailable = true
 			end
 
